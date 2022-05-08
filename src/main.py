@@ -30,14 +30,14 @@ def handle_invalid_usage(error):
 def sitemap():
     return generate_sitemap(app)
 
-@app.route('/user', methods=['GET'])
-def handle_hello():
+# @app.route('/user', methods=['GET'])
+# def handle_hello():
 
-    response_body = {
-        "msg": "Hello, this is your GET /user response "
-    }
+#     response_body = {
+#         "msg": "Hello, this is your GET /user response "
+#     }
 
-    return jsonify(response_body), 200
+#     return jsonify(response_body), 200
 
 people = [
         {
@@ -780,6 +780,55 @@ planets = [
         }
     ]
 
+
+
+users = [
+    {
+        'id': 1,
+        'user_id': "user1",
+        "favorites": [
+            {
+                "planets": []
+            }, 
+            {
+                "starships": []
+            }, 
+            {
+                "people": []
+            }
+        ]
+    },
+    {
+        'id': 2,
+        'user_id': 'user2',
+        "favorites": [
+            {
+                "planets": []
+            }, 
+            {
+                "starships": []
+            }, 
+            {
+                "people": []
+            }
+        ]
+    },
+    {
+        'id': 3,
+        'user_id': 'user3',
+        "favorites": [
+            {
+                "planets": []
+            }, 
+            {
+                "starships": []
+            }, 
+            {
+                "people": []
+            }
+        ]
+    }
+]
 @app.route('/people', methods=['GET'])
 def get_all_people():
 
@@ -832,7 +881,24 @@ def get_planet(id):
     for index in range(len(planets)):
         if id == index:
             return jsonify(planets[index]), 200
-             
+
+@app.route('/users/', methods=['GET'])
+def get_all_users():
+    return jsonify(users), 200
+
+@app.route('/users/favorites', methods=['GET'])
+def get_all_user_favorites():
+    for index in range(len(users)):
+        
+        return jsonify(users[index].favorites), 200
+    
+
+
+# @app.route('/favorite/planet/<int:planet_id>', methods=['POST'])
+# def add_favorite_planet(id):
+#     # for index in range(len(favorites[0].planets)):
+#     #     if (id != favorites[0].planets.id)
+#     print('successful post')
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':
     PORT = int(os.environ.get('PORT', 3000))
